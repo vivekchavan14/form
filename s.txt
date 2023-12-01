@@ -1,0 +1,88 @@
+import React, { useState } from "react";
+import "./IntakeForm.css";
+import { useHistory } from "react-router-dom";
+
+const IntakeForm = () => {
+  const history = useHistory();
+
+  const [formData, setFormData] = useState({
+    name: "",
+    maritalStatus: "",
+    occupation: "",
+    age: "",
+    dob: "",
+    dateOfIntake: "",
+    dateOfAdmission: "",
+    bpl: "",
+    accompaniedBy: "",
+    yearOfDrinkingAbuse: "",
+    yearOfExcessiveAbuse: "",
+    presentPatternAbuse: "",
+    presenceOf: "",
+    useOfOtherDrugs: "",
+    psychiatricProblem: "",
+    denial: "Mild",
+    physicalProblems: "",
+    priorTreatment: "",
+    willingnessForTreatment: "Unwilling",
+    motivatingFactor: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const validateForm = () => {
+    // Your form validation logic here
+    return (
+      formData.name &&
+      formData.maritalStatus &&
+      formData.occupation &&
+      formData.age &&
+      formData.dob &&
+      formData.dateOfIntake &&
+      formData.dateOfAdmission &&
+      formData.bpl &&
+      formData.accompaniedBy &&
+      formData.yearOfDrinkingAbuse &&
+      formData.yearOfExcessiveAbuse &&
+      formData.presentPatternAbuse &&
+      formData.presenceOf &&
+      formData.physicalProblems &&
+      formData.priorTreatment &&
+      formData.motivatingFactor
+    );
+  };
+
+  const handleSubmit = () => {
+    if (validateForm()) {
+      // Perform form submission logic here
+      history.push("/form2"); // Redirects to Form2 upon successful submission
+    } else {
+      alert("Please fill in all fields before proceeding.");
+    }
+  };
+
+  return (
+    <div className="intake-form">
+      <h2>INTAKE FORM</h2>
+      <input
+        type="text"
+        name="name"
+        value={formData.name}
+        onChange={handleInputChange}
+        placeholder="Name"
+      />
+      {/* Include other form fields similarly */}
+
+      <center>
+        <div className="pagination-section">
+          <button onClick={handleSubmit}>Submit & Continue</button>
+        </div>
+      </center>
+    </div>
+  );
+};
+
+export default IntakeForm;
